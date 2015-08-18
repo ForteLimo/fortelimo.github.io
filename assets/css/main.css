@@ -409,4 +409,12 @@ a:after {
     background: #ff7878;
 }
 
-
+/* ==========================================================================
+   Charts
+   ========================================================================== */
+.chartContainer{
+    height: 500px;
+    border: 10px solid #CCCCCC;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
