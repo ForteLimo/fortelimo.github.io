@@ -60,7 +60,101 @@
 			</div><!-- row -->
 		</div><!-- container -->
 	</div><!-- blue wrap -->
+	<!-- PORTFOLIO SECTION -->
+	<div id="dg">
+		<div class="container">
+			<div class="row centered">
+				<h4>OUR SKILLS</h4>
+				<br>
+				
+			<!-- First Chart -->
+			<div class="col-lg-3">
+				<canvas id="canvas" height="130" width="130"></canvas>
+				<br>
+				<script>
+					var doughnutData = [
+							{
+								value: 90,
+								color:"#3498db"
+							},
+							{
+								value : 10,
+								color : "#ecf0f1"
+							}
+						];
+						var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData);
+				</script>
+				<p><b>Dashboarding</b></p>
+				<p><small>Allow us to present your data in an intuitive and organized solution.</small></p>
+			</div><!-- /col-lg-3 -->
 
+			<!-- Second Chart -->
+			<div class="col-lg-3">
+				<canvas id="canvas2" height="130" width="130"></canvas>
+				<br>
+				<script>
+					var doughnutData = [
+							{
+								value: 50,
+								color:"#3498db"
+							},
+							{
+								value : 50,
+								color : "#ecf0f1"
+							}
+						];
+						var myDoughnut = new Chart(document.getElementById("canvas2").getContext("2d")).Doughnut(doughnutData);
+				</script>
+				<p><b>Data Analytics</b></p>
+				<p><small>There is a lot to learn from your data. Let us show you the benefits of process efficiency and improvement.</small></p>
+			</div><!-- /col-lg-3 -->
+			
+			<!-- Third Chart -->
+			<div class="col-lg-3">
+				<canvas id="canvas3" height="130" width="130"></canvas>
+				<br>
+				<script>
+					var doughnutData = [
+							{
+								value: 85,
+								color:"#3498db"
+							},
+							{
+								value : 15,
+								color : "#ecf0f1"
+							}
+						];
+						var myDoughnut = new Chart(document.getElementById("canvas3").getContext("2d")).Doughnut(doughnutData);
+				</script>
+				<p><b>Automated Alerts and Notifications</b></p>
+				<p><small>Dealing with those crucial moments in real-time data, just got a lot easier.</small></p>
+			</div><!-- /col-lg-3 -->
+			
+			<!-- Fourth Chart -->
+			<div class="col-lg-3">
+				<canvas id="canvas4" height="130" width="130"></canvas>
+				<br>
+				<script>
+					var doughnutData = [
+							{
+								value: 80,
+								color:"#3498db"
+							},
+							{
+								value : 20,
+								color : "#ecf0f1"
+							}
+						];
+						var myDoughnut = new Chart(document.getElementById("canvas4").getContext("2d")).Doughnut(doughnutData);
+				</script>
+				<p><b>Data Management & Tools</b></p>
+				<p><small>You may be off to a great start, but lets show you how to realy secure and store your information.</small></p>
+			</div><!-- /col-lg-3 -->
+				
+				
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- DG -->
 
 	<div class="container w">
 		<div class="row centered">
