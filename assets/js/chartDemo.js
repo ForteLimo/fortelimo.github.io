@@ -5,7 +5,7 @@ window.onload = function () {
 		var chart = new CanvasJS.Chart("liveChart",{
 			theme: "theme1",
 			title :{
-				text: "Sample Chart"
+				text: "Live Chart"
 			},			
 			data: [{
 				type: "line",

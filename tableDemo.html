@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supplement Duration Table</title>
+    <meta charset="utf-8">
+	<script src="assets/js/sizzle.min.js"></script>
+    <script src="assets/js/d3.min.js"></script>
+    <script src="assets/js/d3-jetpack.js"></script>
+    <style type="text/css">
+    body { font-family: 'Helvetica Neue', Helvetica; font-weight: 300; padding: 20px;}
+    th { text-align: left; }
+    th, td { padding: 0 1em 0.5ex 0;}
+    th.center, td.center { text-align: center; }
+    th.num, td.num { text-align: right; }
+    </style>
+</head>
+<body>
+    <script>
+		var colorCell = function (col, limit){
+			var tdDuration = d3.selectAll("tbody tr").select("td."+col);
+			for(i=0; i<tdDuration[0].length; i++){
+				//test = Number(tdDuration[0][i].textContent);
+				if( tdDuration[0][i].textContent != "N/A"){
+					tdDuration[0][i].bgColor = Number(tdDuration[0][i].textContent) >= limit ? "green" : "red";
+				}
+			}
+		}
+		
+		var colorCell2 = function (col, upperLimit, lowerLimit){
+			var tdDuration = d3.selectAll("tbody tr").select("td."+col);
+			for(i=0; i<tdDuration[0].length; i++){
+				temp = Number(tdDuration[0][i].textContent);
+				if( tdDuration[0][i].textContent != "N/A"){
+				if (temp>upperLimit){tdDuration[0][i].bgColor = "red"}
+				else if(temp>lowerLimit&temp<upperLimit){tdDuration[0][i].bgColor = "yellow"}
+				else if (temp < lowerLimit) {tdDuration[0][i].bgColor = "green"}
+				else{tdDuration[0][i].bgColor=""}
+				}
+			}
+		}
+		
+			var colorCell3 = function (col, limit){
+			var tdDuration = d3.selectAll("tbody tr").select("td."+col);
+			for(i=0; i<tdDuration[0].length; i++){
+				//test = Number(tdDuration[0][i].textContent);
+				if( tdDuration[0][i].textContent != "N/A"){
+					tdDuration[0][i].bgColor = Number(tdDuration[0][i].textContent) > limit ? "red" : "green";
+				}
+			}
+		}
+		// Get the data
+		d3.csv("assets/data/dummyData.csv", function(error, supplementData) {	
+		
+		// Parse the date / time
+		var parseDate = d3.time.format("%d-%b-%y").parse;
+		console.log(supplementData[0]);
+		
+		//Parse data
+		supplementData.forEach(function(d) {
+			//d["Batch No"] =  d["Batch No"];  
+			d["StartDate"] =  d["StartDate"] == "Invalid Date" ? "N/A" :new Date (d["StartDate"]);   
+			//d["BatchDate"] = parseDate (d["BatchDate"]);
+			d["F3 supplement time (hr)"]= d["F3 supplement time (hr)"] == "NaN" ? "N/A": +d["F3 supplement time (hr)"];
+			d["F6 supplement time (hr)"]= d["F6 supplement time (hr)"] == "NaN" ? "N/A": +d["F6 supplement time (hr)"];
+			d["F3 supplementation duration (hr)"]= d["F3 supplementation duration (hr)"] == "NaN" ? "N/A": +d["F3 supplementation duration (hr)"];
+			d["F6 supplementation duration(hr)"]= d["F6 supplementation duration(hr)"] == "NaN" ? "N/A": +d["F6 supplementation duration(hr)"];
+			d["F3 supplement delay (min)"]= d["F3 supplement delay (min)"] == "NaN" ? "N/A": +d["F3 supplement delay (min)"];
+			d["F6 supplement delay (min)"]= d["F6 supplement delay (min)"] == "NaN" ? "N/A": +d["F6 supplement delay (min)"];
+			d["F3 cooling time (hr)"]= d["F3 cooling time (hr)"] == "NaN" ? "N/A": +d["F3 cooling time (hr)"];
+			d["F6 cooling time (hr)"]= d["F6 cooling time (hr)"] == "NaN" ? "N/A": +d["F6 cooling time (hr)"];
+			d["QTD supp promptness"]= d["QTD supp promptness"] == "NaN" ? "N/A": +d["QTD supp promptness"];
+			d["QTD supp duration success"]= d["QTD supp duration success"] == "NaN" ? "N/A": +d["QTD supp duration success"];
+		});
+
+		// column definitions
+		var columns = [
+			{head:'Batch No', cl: 'title' , html: ƒ('Batch No')},
+			{head:'StartDate', cl: 'date' , html: ƒ('StartDate')},
+			{head:'F3 supplement time (hr)', cl: 'num', html: ƒ('F3 supplement time (hr)')},
+			{head:'F6 supplement time (hr)', cl: 'num' , html: ƒ('F6 supplement time (hr)')},
+			{head:'F3 supplementation duration (hr)', cl: 'supDuration1' , html: ƒ('F3 supplementation duration (hr)')},
+			{head:'F6 supplementation duration(hr)', cl: 'supDuration2' , html: ƒ('F6 supplementation duration(hr)')},
+			{head:'F3 supplement delay (min)', cl: 'supDelay1' , html: ƒ('F3 supplement delay (min)')},
+			{head:'F6 supplement delay (min)', cl: 'supDelay2' , html: ƒ('F6 supplement delay (min)')},
+			{head:'F3 cooling time (hr)', cl: 'supCooling1' , html: ƒ('F3 cooling time (hr)')},
+			{head:'F6 cooling time (hr)', cl: 'supCooling2' , html: ƒ('F6 cooling time (hr)')},
+			{head:'QTD supp promptness', cl: 'num' , html: ƒ('QTD supp promptness')},
+			{head:'QTD supp duration success', cl: 'num' , html: ƒ('QTD supp duration success')}
+		];
+
+		// create table
+		var table = d3.select('body')
+			.append('table');
+
+		// create table header
+		table.append('thead').append('tr')
+			.selectAll('th')
+			.data(columns).enter()
+			.append('th')
+			.attr('class', ƒ('cl'))
+			.text(ƒ('head'));
+
+		// create table body
+		table.append('tbody')
+			.selectAll('tr')
+			.data(supplementData).enter()
+			.append('tr')
+			.selectAll('td')
+			.data(function(row, i) {
+				return columns.map(function(c) {
+					// compute cell values for this specific row
+					var cell = {};
+					d3.keys(c).forEach(function(k) {
+						cell[k] = typeof c[k] == 'function' ? c[k](row,i) : c[k];
+					});
+					return cell;
+				});
+			}).enter()
+			.append('td')
+			.html(ƒ('html'))
+			.attr('class', ƒ('cl'));
+		
+		});
+    </script>
+</body>
+</html>
